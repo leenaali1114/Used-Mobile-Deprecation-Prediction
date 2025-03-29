@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Results</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-lg mt-5">
+                    <div class="card-header bg-success text-white text-center">
+                        <h2><i class="fas fa-check-circle me-2"></i> Prediction Results</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <img src="{{ phone_image }}" alt="Phone Image" class="img-fluid rounded mb-3">
+                                <div class="text-center">
+                                    <h4>{{ features.device_brand }} ({{ features.os }})</h4>
+                                    <p>{{ features.release_year }} | {{ features.days_used }} days used</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="result-box mb-4">
+                                    <h3 class="text-center mb-3">Predicted Used Price</h3>
+                                    <div class="price-display">
+                                        <span class="currency">$</span>
+                                        <span class="price">{{ used_price }}</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="result-box">
+                                    <h3 class="text-center mb-3">Predicted Depreciation</h3>
+                                    <div class="depreciation-display">
+                                        <span class="percentage">{{ deprecation }}%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <hr>
+                        
+                        <div class="row mt-4">
+                            <div class="col-md-12">
+                                <h4>Phone Specifications</h4>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <ul class="list-group">
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                Screen Size
+                                                <span class="badge bg-primary rounded-pill">{{ features.screen_size }} inches</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                Rear Camera
+                                                <span class="badge bg-primary rounded-pill">{{ features.rear_camera_mp }} MP</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                Front Camera
+                                                <span class="badge bg-primary rounded-pill">{{ features.front_camera_mp }} MP</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                Internal Memory
+                                                <span class="badge bg-primary rounded-pill">{{ features.internal_memory }} GB</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <ul class="list-group">
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                RAM
+                                                <span class="badge bg-primary rounded-pill">{{ features.ram }} GB</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                Battery
+                                                <span class="badge bg-primary rounded-pill">{{ features.battery }} mAh</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                Weight
+                                                <span class="badge bg-primary rounded-pill">{{ features.weight }} g</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                Network
+                                                <span class="badge bg-primary rounded-pill">
+                                                    {% if features['4g'] == 'yes' %}4G{% endif %}
+                                                    {% if features['5g'] == 'yes' %} | 5G{% endif %}
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid gap-2 mt-4">
+                            <a href="/" class="btn btn-primary btn-lg">
+                                <i class="fas fa-arrow-left me-2"></i> Make Another Prediction
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html> 
